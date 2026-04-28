@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sonam Yadav – Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --bg:#0a0a0f;--surface:#111118;--card:#16161e;--border:rgba(255,255,255,0.08);
+    --accent:#7c6af7;--accent2:#f97b6b;--text:#f0eefc;--muted:#9896b0;
+    --tag-bg:rgba(124,106,247,0.12);--tag-border:rgba(124,106,247,0.3);
+  }
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.7;}
+
+  nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1rem 3rem;background:rgba(10,10,15,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);}
+  .nav-logo{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--accent);letter-spacing:0.02em;}
+  .nav-links{display:flex;gap:2rem;list-style:none;}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:0.82rem;letter-spacing:0.06em;text-transform:uppercase;transition:color 0.2s;}
+  .nav-links a:hover{color:var(--text);}
+
+  .hero{min-height:93vh;display:flex;flex-direction:column;justify-content:center;padding:4rem 3rem 3rem;position:relative;overflow:hidden;}
+  .blob1{position:absolute;top:-15%;right:-8%;width:580px;height:580px;border-radius:50%;background:radial-gradient(circle,rgba(124,106,247,0.18) 0%,transparent 68%);pointer-events:none;}
+  .blob2{position:absolute;bottom:-10%;left:15%;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(249,123,107,0.1) 0%,transparent 70%);pointer-events:none;}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--tag-bg);border:1px solid var(--tag-border);border-radius:100px;padding:6px 16px;font-size:0.78rem;color:var(--accent);margin-bottom:1.5rem;width:fit-content;}
+  .pulse{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.35}}
+  h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,8vw,6rem);font-weight:700;line-height:1.05;margin-bottom:0.5rem;}
+  h1 em{font-style:italic;color:var(--accent);}
+  .tagline{font-size:1.05rem;color:var(--muted);margin-bottom:2.5rem;max-width:530px;line-height:1.65;}
+  .hero-cta{display:flex;gap:1rem;flex-wrap:wrap;}
+  .btn{padding:0.75rem 2rem;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.93rem;font-weight:500;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block;}
+  .btn-primary{background:var(--accent);color:#fff;border:none;}
+  .btn-primary:hover{background:#6a59e0;transform:translateY(-1px);}
+  .btn-outline{background:transparent;color:var(--text);border:1px solid var(--border);}
+  .btn-outline:hover{border-color:var(--accent);color:var(--accent);}
+
+  section{padding:5rem 3rem;}
+  .section-label{font-size:0.7rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem;}
+  h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:700;margin-bottom:3rem;line-height:1.15;}
+  .divider{width:55px;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;margin-bottom:1.75rem;}
+
+  .skills-section{background:var(--surface);}
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:1rem;}
+  .skill-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.4rem;transition:border-color 0.2s,transform 0.2s;}
+  .skill-card:hover{border-color:var(--accent);transform:translateY(-3px);}
+  .skill-icon{font-size:1.5rem;margin-bottom:0.7rem;}
+  .skill-name{font-weight:500;font-size:0.93rem;margin-bottom:0.2rem;}
+  .skill-level{font-size:0.77rem;color:var(--muted);}
+  .skill-bar{height:3px;background:var(--border);border-radius:2px;margin-top:0.7rem;}
+  .skill-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));}
+
+  .project-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem;}
+  .project-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;position:relative;overflow:hidden;transition:border-color 0.25s,transform 0.25s;display:flex;flex-direction:column;}
+  .project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+  .project-card.p1::before{background:linear-gradient(90deg,#7c6af7,#5bb8f5);}
+  .project-card.p2::before{background:linear-gradient(90deg,#f97b6b,#f7c87a);}
+  .project-card:hover{border-color:rgba(124,106,247,0.35);transform:translateY(-5px);}
+  .project-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem;}
+  .project-num{font-size:0.7rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;}
+  .project-emoji{font-size:2rem;}
+  .project-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;margin-bottom:0.7rem;}
+  .project-desc{font-size:0.87rem;color:var(--muted);line-height:1.65;margin-bottom:1.25rem;}
+  .feature-list{margin-bottom:1.4rem;flex:1;}
+  .feature-item{display:flex;align-items:flex-start;gap:8px;font-size:0.82rem;color:var(--muted);margin-bottom:7px;}
+  .feature-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);margin-top:7px;flex-shrink:0;}
+  .project-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.25rem;}
+  .tag{background:var(--tag-bg);border:1px solid var(--tag-border);border-radius:100px;padding:3px 10px;font-size:0.71rem;color:var(--accent);}
+  .tag-red{background:rgba(249,123,107,0.1);border-color:rgba(249,123,107,0.28);color:var(--accent2);}
+  .project-links{display:flex;gap:10px;margin-top:auto;}
+  .proj-link{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:7px;font-size:0.8rem;font-weight:500;text-decoration:none;border:1px solid var(--border);color:var(--muted);transition:all 0.2s;}
+  .proj-link:hover{border-color:var(--accent);color:var(--accent);}
+  .proj-link.gh{background:rgba(255,255,255,0.04);}
+
+  .certs-section{background:var(--surface);}
+  .cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;}
+  .cert-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;display:flex;align-items:center;gap:1rem;transition:border-color 0.2s;}
+  .cert-card:hover{border-color:var(--accent2);}
+  .cert-icon{width:42px;height:42px;border-radius:10px;flex-shrink:0;background:rgba(249,123,107,0.12);border:1px solid rgba(249,123,107,0.25);display:flex;align-items:center;justify-content:center;font-size:1.15rem;}
+  .cert-name{font-weight:500;font-size:0.9rem;}
+  .cert-issuer{font-size:0.77rem;color:var(--muted);}
+
+  .edu-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;display:flex;align-items:center;gap:2rem;max-width:660px;}
+  .edu-icon{width:58px;height:58px;border-radius:50%;flex-shrink:0;background:var(--tag-bg);border:1px solid var(--tag-border);display:flex;align-items:center;justify-content:center;font-size:1.7rem;}
+  .edu-degree{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;}
+  .edu-college{color:var(--accent);font-size:0.87rem;margin:0.25rem 0;}
+  .edu-year{font-size:0.8rem;color:var(--muted);}
+
+  .contact-section{text-align:center;}
+  .contact-intro{color:var(--muted);max-width:460px;margin:0 auto 2rem;font-size:0.95rem;}
+  .contact-grid{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;}
+  .contact-chip{display:flex;align-items:center;gap:9px;background:var(--card);border:1px solid var(--border);border-radius:100px;padding:11px 22px;font-size:0.87rem;text-decoration:none;color:var(--text);transition:border-color 0.2s,color 0.2s;}
+  .contact-chip:hover{border-color:var(--accent);color:var(--accent);}
+  .contact-chip.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .contact-chip.primary:hover{background:#6a59e0;border-color:#6a59e0;color:#fff;}
+
+  footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:0.78rem;color:var(--muted);}
+
+  @media(max-width:768px){
+    nav{padding:1rem 1.5rem;}
+    .nav-links{gap:1rem;}
+    .nav-links a{font-size:0.72rem;}
+    .hero{padding:3rem 1.5rem 2rem;}
+    section{padding:3.5rem 1.5rem;}
+    .edu-card{flex-direction:column;gap:1rem;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">SY</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="about">
+  <div class="blob1"></div>
+  <div class="blob2"></div>
+  <div class="hero-badge"><div class="pulse"></div> Open to Placement Opportunities</div>
+  <h1>Sonam<br><em>Yadav</em></h1>
+  <p class="tagline">MCA Student · Full Stack Developer · ML Enthusiast<br>Building intelligent applications — from AI weather platforms to healthcare predictions.</p>
+  <div class="hero-cta">
+    <a class="btn btn-primary" href="#projects">View My Projects</a>
+    <a class="btn btn-outline" href="mailto:sonamy2704@gmail.com">Get In Touch</a>
+  </div>
+</section>
+
+<section class="skills-section" id="skills">
+  <div class="section-label">What I know</div>
+  <div class="divider"></div>
+  <h2>Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-card"><div class="skill-icon">☕</div><div class="skill-name">Java</div><div class="skill-level">Core & OOP</div><div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div></div>
+    <div class="skill-card"><div class="skill-icon">🐍</div><div class="skill-name">Python</div><div class="skill-level">ML & Scripting</div><div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div></div>
+    <div class="skill-card"><div class="skill-icon">🌐</div><div class="skill-name">HTML & CSS</div><div class="skill-level">Responsive Design</div><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+    <div class="skill-card"><div class="skill-icon">⚛️</div><div class="skill-name">MERN Stack</div><div class="skill-level">MongoDB · Express · React · Node</div><div class="skill-bar"><div class="skill-fill" style="width:72%"></div></div></div>
+    <div class="skill-card"><div class="skill-icon">🗄️</div><div class="skill-name">SQL</div><div class="skill-level">Database Design</div><div class="skill-bar"><div class="skill-fill" style="width:76%"></div></div></div>
+    <div class="skill-card"><div class="skill-icon">🤖</div><div class="skill-name">Machine Learning</div><div class="skill-level">Sklearn · Classification</div><div class="skill-bar"><div class="skill-fill" style="width:68%"></div></div></div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-label">What I've built</div>
+  <div class="divider"></div>
+  <h2>Projects</h2>
+  <div class="project-grid">
+
+    <div class="project-card p1">
+      <div class="project-top">
+        <div class="project-num">01 · Featured Project</div>
+        <div class="project-emoji">🌤️</div>
+      </div>
+      <div class="project-title">AtmosIQ — AI Weather Intelligence Platform</div>
+      <p class="project-desc">A production-ready full-stack weather application with real-time updates, ML-powered rain predictions, NLP trip planning, and multi-city comparison.</p>
+      <div class="feature-list">
+        <div class="feature-item"><div class="feature-dot"></div>ML-based rain probability & temperature trend prediction using RandomForest</div>
+        <div class="feature-item"><div class="feature-dot"></div>Natural language trip planner — understands "3-day cold trip under ₹10k"</div>
+        <div class="feature-item"><div class="feature-dot"></div>Real-time live weather push notifications via Socket.io</div>
+        <div class="feature-item"><div class="feature-dot"></div>Google & GitHub OAuth with JWT authentication & bcrypt security</div>
+        <div class="feature-item"><div class="feature-dot"></div>Admin analytics dashboard with multi-city comparison charts</div>
+      </div>
+      <div class="project-tags">
+        <span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">MongoDB</span><span class="tag">Socket.io</span><span class="tag">ML</span><span class="tag">NLP</span><span class="tag">JWT Auth</span><span class="tag">REST API</span>
+      </div>
+      <div class="project-links">
+        <a class="proj-link gh" href="https://github.com/sonamy2704" target="_blank">🐙 GitHub</a>
+      </div>
+    </div>
+
+    <div class="project-card p2">
+      <div class="project-top">
+        <div class="project-num">02 · ML + Full Stack Project</div>
+        <div class="project-emoji">❤️</div>
+      </div>
+      <div class="project-title">Heart Disease Prediction System</div>
+      <p class="project-desc">An end-to-end full-stack ML application that predicts heart disease risk from patient clinical data, with a React frontend and Flask REST API backend.</p>
+      <div class="feature-list">
+        <div class="feature-item"><div class="feature-dot"></div>Trained & compared 3 ML algorithms — Random Forest, Gradient Boosting, SVM with GridSearchCV tuning</div>
+        <div class="feature-item"><div class="feature-dot"></div>Full-stack: Flask REST API backend + React + Tailwind CSS frontend</div>
+        <div class="feature-item"><div class="feature-dot"></div>User authentication with JWT, bcrypt password hashing & Flask-Mail</div>
+        <div class="feature-item"><div class="feature-dot"></div>EDA visualizations — correlation heatmap, age distribution, target analysis</div>
+        <div class="feature-item"><div class="feature-dot"></div>Deployed model served via REST API with StandardScaler preprocessing pipeline</div>
+      </div>
+      <div class="project-tags">
+        <span class="tag tag-red">Python</span><span class="tag tag-red">Flask</span><span class="tag tag-red">Scikit-learn</span><span class="tag tag-red">React</span><span class="tag tag-red">Tailwind</span><span class="tag tag-red">SQLite</span><span class="tag tag-red">JWT</span>
+      </div>
+      <div class="project-links">
+        <a class="proj-link gh" href="https://github.com/sonamy2704" target="_blank">🐙 GitHub</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="certs-section" id="certifications">
+  <div class="section-label">Credentials</div>
+  <div class="divider"></div>
+  <h2>Certifications</h2>
+  <div class="cert-grid">
+    <div class="cert-card"><div class="cert-icon">🎯</div><div><div class="cert-name">C# Programming</div><div class="cert-issuer">Microsoft / Online Course</div></div></div>
+    <div class="cert-card"><div class="cert-icon">🤖</div><div><div class="cert-name">Generative AI</div><div class="cert-issuer">AI Fundamentals Certification</div></div></div>
+    <div class="cert-card"><div class="cert-icon">📊</div><div><div class="cert-name">MATLAB Plots & Visualization</div><div class="cert-issuer">MathWorks</div></div></div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="section-label">Background</div>
+  <div class="divider"></div>
+  <h2>Education</h2>
+  <div class="edu-card">
+    <div class="edu-icon">🎓</div>
+    <div>
+      <div class="edu-degree">Master of Computer Applications (MCA)</div>
+      <div class="edu-college">TIMSCDR, Mumbai</div>
+      <div class="edu-year">Currently Pursuing · 2024 – Present</div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-section" id="contact">
+  <div class="section-label" style="text-align:center">Hire me</div>
+  <div class="divider" style="margin:0.75rem auto 1.5rem"></div>
+  <h2>Let's Connect</h2>
+  <p class="contact-intro">Actively seeking placement opportunities in Full Stack Development & AI/ML roles. Let's build something great together!</p>
+  <div class="contact-grid">
+    <a class="contact-chip primary" href="mailto:sonamy2704@gmail.com">✉️ sonamy2704@gmail.com</a>
+    <a class="contact-chip" href="https://www.linkedin.com/in/sonam-yd/" target="_blank">💼 LinkedIn</a>
+    <a class="contact-chip" href="https://github.com/sonamy2704" target="_blank">🐙 GitHub</a>
+  </div>
+</section>
+
+<footer>Designed & built by Sonam Yadav · 2025</footer>
+
+</body>
+</html>
